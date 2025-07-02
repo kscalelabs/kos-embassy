@@ -1,0 +1,42 @@
+[package]
+name = "kos-embassy"
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+description = "K-OS Embassy Firmware for Humanoid Robot I/O Management"
+authors = ["scott@kscale.dev"]
+
+[dependencies]
+#embassy-stm32    = { version = "0.2.0", features = [ "defmt", "time-driver-any", "stm32g071rb", "memory-x", "unstable-pac", "exti"]  }
+embassy-stm32 = { git = "https://github.com/nfreq/embassy.git", rev = "fa328e49ac8940d687dba8e3bcd3021e393e0d78", features = [ "defmt", "time-driver-any", "stm32g071rb", "memory-x","unstable-pac", "exti" ] }
+embassy-executor = { version = "0.7.0", features = ["arch-cortex-m","executor-thread","executor-interrupt","defmt"] }
+embassy-time     = { version = "0.4.0", features = ["defmt","defmt-timestamp-uptime","tick-hz-32_768"] }
+embassy-sync     = { version = "0.7.0", features = ["defmt"] }
+embassy-usb      = { version = "0.4.0", default-features = false, features = ["defmt"] }
+embassy-futures  = { version = "0.1.0" }
+
+bytemuck = { version = "1.14", features = ["derive"] }
+
+
+defmt = "1.0.1"
+defmt-rtt = "1.0.0"
+static_cell = "2.1.0"
+
+cortex-m = { version = "0.7.6", features = ["inline-asm", "critical-section-single-core"] }
+cortex-m-rt = "0.7.0"
+embedded-hal = "0.2.6"
+panic-probe = { version = "1.0.0", features = ["print-defmt"] }
+heapless = { version = "0.8", default-features = false }
+portable-atomic = { version = "1.5", features = ["unsafe-assume-single-core"] }
+embedded-io-async = { version = "0.6.1" }
+crc16 = "0.4" 
+
+[patch.crates-io]
+embassy-stm32        = { git = "https://github.com/nfreq/embassy.git", rev = "fa328e49ac8940d687dba8e3bcd3021e393e0d78" }
+embassy-executor  = { git = "https://github.com/nfreq/embassy.git", rev = "fa328e49ac8940d687dba8e3bcd3021e393e0d78" }
+embassy-time         = { git = "https://github.com/nfreq/embassy.git", rev = "fa328e49ac8940d687dba8e3bcd3021e393e0d78" }
+embassy-time-driver  = { git = "https://github.com/nfreq/embassy.git", rev = "fa328e49ac8940d687dba8e3bcd3021e393e0d78" }
+
+
+[profile.release]
+debug = 2
